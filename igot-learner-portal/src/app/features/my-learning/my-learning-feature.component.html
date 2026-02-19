@@ -1,0 +1,80 @@
+<div class="my-learning-feature">
+  <!-- Header -->
+  <section class="learning-header">
+    <h1 class="page-title">My Learning</h1>
+    <p class="page-subtitle">Track your learning journey and continue where you left off</p>
+  </section>
+
+  <mat-tab-group class="learning-tabs">
+    <!-- In Progress Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>pending</mat-icon>&nbsp; In Progress ({{ inProgressCourses.length }})
+      </ng-template>
+      <div class="tab-content">
+        <div class="course-list">
+          <mat-card *ngFor="let course of inProgressCourses" class="course-card" appearance="outlined">
+            <mat-card-content class="course-content">
+              <div class="course-icon-container">
+                <mat-icon class="course-icon">{{ course.icon }}</mat-icon>
+              </div>
+              <div class="course-details">
+                <h3 class="course-title">{{ course.title }}</h3>
+                <p class="course-provider">{{ course.provider }} · {{ course.duration }}</p>
+                <div class="progress-section">
+                  <mat-progress-bar mode="determinate" [value]="course.progress"></mat-progress-bar>
+                  <span class="progress-label">{{ course.progress }}% complete</span>
+                </div>
+                <span class="last-accessed">Last accessed: {{ course.lastAccessed }}</span>
+              </div>
+              <button mat-flat-button color="primary" class="resume-btn">
+                <mat-icon>play_arrow</mat-icon> Resume
+              </button>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-- Completed Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>check_circle</mat-icon>&nbsp; Completed ({{ completedCourses.length }})
+      </ng-template>
+      <div class="tab-content">
+        <div class="course-list">
+          <mat-card *ngFor="let course of completedCourses" class="course-card" appearance="outlined">
+            <mat-card-content class="course-content">
+              <div class="course-icon-container completed">
+                <mat-icon class="course-icon">{{ course.icon }}</mat-icon>
+              </div>
+              <div class="course-details">
+                <h3 class="course-title">{{ course.title }}</h3>
+                <p class="course-provider">{{ course.provider }}</p>
+                <div class="completion-info">
+                  <span class="completed-date">
+                    <mat-icon inline>event</mat-icon> Completed {{ course.completedDate }}
+                  </span>
+                  <span class="score">
+                    <mat-icon inline>grade</mat-icon> Score: {{ course.score }}%
+                  </span>
+                  <mat-chip *ngIf="course.certificate" class="cert-chip">
+                    <mat-icon>workspace_premium</mat-icon> Certificate Earned
+                  </mat-chip>
+                </div>
+              </div>
+              <button mat-stroked-button color="primary" class="review-btn">
+                <mat-icon>visibility</mat-icon> Review
+              </button>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div class="mfe-badge">
+    <mat-icon>extension</mat-icon>
+    <span>Angular 20 MFE — My Learning Feature</span>
+  </div>
+</div>

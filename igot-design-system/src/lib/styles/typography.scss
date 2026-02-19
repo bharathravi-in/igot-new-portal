@@ -1,0 +1,234 @@
+// ─────────────────────────────────────────────────────────
+// Typography System — igot-design-system
+// ─────────────────────────────────────────────────────────
+// Global typography rules using design tokens.
+// Provides consistent hierarchy across all zoom levels.
+//
+// Font Size Scale Reference:
+//  8px =  50%  = 0.5rem   (--text-3xs)
+// 10px =  62.5%= 0.625rem (--text-2xs)
+// 12px =  75%  = 0.75rem  (--text-xs)
+// 14px =  87.5%= 0.875rem (--text-sm)
+// 16px = 100%  = 1.0rem   (--text-base)
+// 20px = 125%  = 1.25rem  (--text-lg)
+// 24px = 150%  = 1.5rem   (--text-xl)
+// 28px = 175%  = 1.75rem  (--text-2xl)
+// 32px = 200%  = 2.0rem   (--text-3xl)
+// 36px = 225%  = 2.25rem  (--text-4xl)
+// 40px = 250%  = 2.5rem   (--text-5xl)
+// 44px = 275%  = 2.75rem  (--text-6xl)
+// 48px = 300%  = 3.0rem   (--text-7xl)
+// ─────────────────────────────────────────────────────────
+
+@use './breakpoints' as bp;
+
+// ── Base Typography ───────────────────────────────────────
+body {
+  font-family: var(--font-family);
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ── Headings (responsive across zoom levels) ──────────────
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+}
+
+// h1: 32px mobile → 40px tablet → 48px desktop
+h1 {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-extrabold);
+  letter-spacing: -0.025em;
+
+  @include bp.breakpoint-up('tablet') {
+    font-size: var(--text-5xl);
+  }
+
+  @include bp.breakpoint-up('desktop') {
+    font-size: var(--text-7xl);
+  }
+}
+
+// h2: 28px mobile → 32px tablet → 36px desktop
+h2 {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.02em;
+
+  @include bp.breakpoint-up('tablet') {
+    font-size: var(--text-3xl);
+  }
+
+  @include bp.breakpoint-up('desktop') {
+    font-size: var(--text-4xl);
+  }
+}
+
+// h3: 24px mobile → 28px tablet → 32px desktop
+h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+
+  @include bp.breakpoint-up('tablet') {
+    font-size: var(--text-2xl);
+  }
+
+  @include bp.breakpoint-up('desktop') {
+    font-size: var(--text-3xl);
+  }
+}
+
+// h4: 20px mobile → 24px desktop
+h4 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+
+  @include bp.breakpoint-up('desktop') {
+    font-size: var(--text-xl);
+  }
+}
+
+// h5: 16px mobile → 20px desktop
+h5 {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+
+  @include bp.breakpoint-up('desktop') {
+    font-size: var(--text-lg);
+  }
+}
+
+// h6: 14px mobile → 16px desktop
+h6 {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+
+  @include bp.breakpoint-up('desktop') {
+    font-size: var(--text-base);
+  }
+}
+
+// ── Paragraphs ────────────────────────────────────────────
+p {
+  margin: 0 0 var(--space-4) 0;
+  line-height: var(--leading-relaxed);
+}
+
+// ── Small Text ────────────────────────────────────────────
+small,
+.text-small {
+  font-size: var(--text-sm);     // 14px / 87.5%
+  line-height: var(--leading-normal);
+}
+
+.text-xs {
+  font-size: var(--text-xs);     // 12px / 75%
+  line-height: var(--leading-normal);
+}
+
+.text-2xs {
+  font-size: var(--text-2xs);    // 10px / 62.5%
+  line-height: var(--leading-normal);
+}
+
+.text-3xs {
+  font-size: var(--text-3xs);    //  8px / 50%
+  line-height: var(--leading-normal);
+}
+
+// ── Caption / Label ───────────────────────────────────────
+.caption {
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+}
+
+// ── Code / Monospace ──────────────────────────────────────
+code,
+pre,
+kbd,
+.monospace {
+  font-family: var(--font-family-mono);
+}
+
+code {
+  font-size: 0.875em;
+  padding: 0.125em 0.375em;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-tertiary);
+  color: var(--color-primary);
+}
+
+pre {
+  overflow-x: auto;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-tertiary);
+
+  code {
+    padding: 0;
+    background: none;
+  }
+}
+
+// ── Links ─────────────────────────────────────────────────
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+}
+
+// ── Lists ─────────────────────────────────────────────────
+ul, ol {
+  margin: 0 0 var(--space-4) 0;
+  padding-left: var(--space-6);
+}
+
+li {
+  margin-bottom: var(--space-1);
+}
+
+// ── Blockquote ────────────────────────────────────────────
+blockquote {
+  margin: var(--space-4) 0;
+  padding: var(--space-4) var(--space-6);
+  border-left: 4px solid var(--color-primary);
+  background-color: var(--bg-secondary);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ── Selection ─────────────────────────────────────────────
+::selection {
+  background-color: var(--color-primary-light);
+  color: var(--text-primary);
+}

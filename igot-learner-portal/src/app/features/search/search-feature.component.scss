@@ -1,0 +1,165 @@
+.search-feature {
+  font-family: 'Lato', 'Roboto', sans-serif;
+  color: #333;
+}
+
+.search-header {
+  background: linear-gradient(135deg, #0d47a1, #1565c0);
+  color: #fff;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+
+  .search-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 1.5rem;
+  }
+
+  .search-bar {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 800px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .search-input {
+      flex: 1;
+      min-width: 280px;
+
+      ::ng-deep .mat-mdc-text-field-wrapper {
+        background: #fff;
+        border-radius: 8px;
+      }
+    }
+
+    .category-select {
+      min-width: 180px;
+
+      ::ng-deep .mat-mdc-text-field-wrapper {
+        background: #fff;
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+.trending-section {
+  padding: 1rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+
+  .section-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #666;
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  mat-chip {
+    cursor: pointer;
+  }
+}
+
+.results-section {
+  padding: 1rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+
+  .results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .result-card {
+    .result-content {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+    }
+
+    .result-icon-container {
+      background: #e3f2fd;
+      border-radius: 12px;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      .result-icon {
+        font-size: 1.75rem;
+        width: 1.75rem;
+        height: 1.75rem;
+        color: #1565c0;
+      }
+    }
+
+    .result-details {
+      flex: 1;
+      min-width: 0;
+
+      .result-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0 0 0.25rem;
+      }
+
+      .result-provider {
+        font-size: 0.8rem;
+        color: #666;
+        margin: 0 0 0.5rem;
+      }
+
+      .result-meta {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+
+        .meta-item {
+          display: inline-flex;
+          align-items: center;
+          gap: 2px;
+          font-size: 0.75rem;
+          color: #888;
+
+          mat-icon {
+            font-size: 0.875rem;
+            width: 0.875rem;
+            height: 0.875rem;
+          }
+        }
+      }
+    }
+
+    .enroll-btn {
+      flex-shrink: 0;
+    }
+  }
+}
+
+.mfe-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  margin: 1rem 2rem;
+  background: #e3f2fd;
+  border: 1px dashed #1976d2;
+  border-radius: 8px;
+  color: #0d47a1;
+  font-size: 0.8rem;
+  font-weight: 500;
+}

@@ -1,0 +1,75 @@
+<div class="search-feature">
+  <!-- Search Header -->
+  <section class="search-header">
+    <h1 class="search-title">Explore Courses & Programs</h1>
+    <div class="search-bar">
+      <mat-form-field appearance="outline" class="search-input">
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          matInput
+          placeholder="Search courses, programs, topics..."
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="onSearch()"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="category-select">
+        <mat-select [(ngModel)]="selectedCategory">
+          <mat-option *ngFor="let cat of categories" [value]="cat.value">
+            {{ cat.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-flat-button color="primary" (click)="onSearch()">
+        <mat-icon>search</mat-icon> Search
+      </button>
+    </div>
+  </section>
+
+  <!-- Trending Tags -->
+  <section class="trending-section">
+    <h3 class="section-label">Trending Topics</h3>
+    <mat-chip-set>
+      <mat-chip *ngFor="let tag of trendingTags" (click)="searchQuery = tag; onSearch()">
+        {{ tag }}
+      </mat-chip>
+    </mat-chip-set>
+  </section>
+
+  <!-- Search Results -->
+  <section class="results-section">
+    <h2 class="section-title">Popular Courses</h2>
+    <div class="results-list">
+      <mat-card *ngFor="let result of searchResults" class="result-card" appearance="outlined">
+        <mat-card-content class="result-content">
+          <div class="result-icon-container">
+            <mat-icon class="result-icon">{{ result.icon }}</mat-icon>
+          </div>
+          <div class="result-details">
+            <h3 class="result-title">{{ result.title }}</h3>
+            <p class="result-provider">{{ result.provider }}</p>
+            <div class="result-meta">
+              <span class="meta-item">
+                <mat-icon inline>category</mat-icon> {{ result.type }}
+              </span>
+              <span class="meta-item">
+                <mat-icon inline>schedule</mat-icon> {{ result.duration }}
+              </span>
+              <span class="meta-item">
+                <mat-icon inline>star</mat-icon> {{ result.rating }}
+              </span>
+              <span class="meta-item">
+                <mat-icon inline>people</mat-icon> {{ result.enrolled | number }} enrolled
+              </span>
+            </div>
+          </div>
+          <button mat-flat-button color="primary" class="enroll-btn">View</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <div class="mfe-badge">
+    <mat-icon>extension</mat-icon>
+    <span>Angular 20 MFE — Search Feature</span>
+  </div>
+</div>

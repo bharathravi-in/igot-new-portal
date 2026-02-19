@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--toolbar-height));
+  // Add bottom padding on mobile for the fixed bottom nav
+  padding-bottom: var(--bottom-nav-height);
+}
+
+// Remove bottom padding on tablet+ where bottom nav is hidden
+@media (min-width: 576px) {
+  :host {
+    padding-bottom: 0;
+  }
+}
+
+// Material card responsive styling
+.mat-mdc-card {
+  border-radius: var(--radius-xl);
+}
+
+// Reference tables
+table {
+  th, td {
+    white-space: nowrap;
+  }
+}

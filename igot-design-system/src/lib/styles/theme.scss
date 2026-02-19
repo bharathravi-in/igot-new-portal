@@ -1,0 +1,91 @@
+// ─────────────────────────────────────────────────────────
+// Theme Definitions — igot-design-system
+// ─────────────────────────────────────────────────────────
+// Light and Dark theme color palettes.
+// Theme switching occurs via `.dark` class on <html>.
+//
+// Usage:
+//   document.documentElement.classList.toggle('dark')
+// ─────────────────────────────────────────────────────────
+
+// ── Light Theme (default) ─────────────────────────────────
+:root {
+  // Brand Colors
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-light: #dbeafe;
+  --color-accent: #7c3aed;
+  --color-accent-hover: #6d28d9;
+  --color-accent-light: #ede9fe;
+  --color-warn: #dc2626;
+  --color-warn-hover: #b91c1c;
+  --color-warn-light: #fee2e2;
+
+  // Semantic Colors
+  --color-success: #16a34a;
+  --color-success-light: #dcfce7;
+  --color-info: #0284c7;
+  --color-info-light: #e0f2fe;
+
+  // Background
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  --bg-inverse: #111827;
+
+  // Text
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --text-inverse: #f9fafb;
+  --text-on-primary: #ffffff;
+
+  // Borders
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+  --border-focus: #2563eb;
+
+  // Overlay
+  --overlay-bg: rgb(0 0 0 / 0.5);
+}
+
+// ── Dark Theme ────────────────────────────────────────────
+.dark {
+  // Brand Colors (slightly adjusted for dark backgrounds)
+  --color-primary: #3b82f6;
+  --color-primary-hover: #60a5fa;
+  --color-primary-light: #1e3a5f;
+  --color-accent: #8b5cf6;
+  --color-accent-hover: #a78bfa;
+  --color-accent-light: #2e1065;
+  --color-warn: #ef4444;
+  --color-warn-hover: #f87171;
+  --color-warn-light: #450a0a;
+
+  // Semantic Colors
+  --color-success: #22c55e;
+  --color-success-light: #052e16;
+  --color-info: #38bdf8;
+  --color-info-light: #0c4a6e;
+
+  // Background
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --bg-inverse: #f9fafb;
+
+  // Text
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+  --text-inverse: #111827;
+  --text-on-primary: #ffffff;
+
+  // Borders
+  --border-primary: #374151;
+  --border-secondary: #4b5563;
+  --border-focus: #3b82f6;
+
+  // Overlay
+  --overlay-bg: rgb(0 0 0 / 0.7);
+}

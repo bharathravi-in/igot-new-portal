@@ -1,0 +1,58 @@
+<div class="home-feature">
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h1 class="hero-title">{{ bannerTitle }}</h1>
+      <p class="hero-subtitle">{{ bannerSubtitle }}</p>
+      <button mat-flat-button color="primary" class="hero-cta">
+        <mat-icon>play_circle</mat-icon>
+        Start Learning
+      </button>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section class="quick-links">
+    <div class="quick-links-grid">
+      <mat-card *ngFor="let link of quickLinks" class="quick-link-card" appearance="outlined">
+        <mat-card-content>
+          <mat-icon class="quick-link-icon" color="primary">{{ link.icon }}</mat-icon>
+          <span class="quick-link-label">{{ link.label }}</span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- Featured Courses -->
+  <section class="featured-courses">
+    <h2 class="section-title">Featured Courses</h2>
+    <div class="courses-grid">
+      <mat-card *ngFor="let course of featuredCourses" class="course-card" appearance="outlined">
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="course-icon">{{ course.icon }}</mat-icon>
+          <mat-card-title>{{ course.title }}</mat-card-title>
+          <mat-card-subtitle>
+            <mat-chip-set>
+              <mat-chip>{{ course.category }}</mat-chip>
+              <mat-chip>{{ course.level }}</mat-chip>
+            </mat-chip-set>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ course.description }}</p>
+          <span class="course-duration">
+            <mat-icon inline>schedule</mat-icon> {{ course.duration }}
+          </span>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-button color="primary">Enroll Now</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+
+  <div class="mfe-badge">
+    <mat-icon>extension</mat-icon>
+    <span>Angular 20 MFE — Home Feature</span>
+  </div>
+</div>

@@ -1,0 +1,183 @@
+// ─────────────────────────────────────────────────────────
+// Breakpoints & Responsive Mixins — igot-design-system
+// ─────────────────────────────────────────────────────────
+//
+// Zoom-aware breakpoint system based on effective viewport
+// widths at different browser zoom levels on a 1280px screen.
+//
+// ┌────────┬────────────────┬──────────────────────────────┐
+// │  Zoom  │ Eff. Width     │ Layout                       │
+// ├────────┼────────────────┼──────────────────────────────┤
+// │  400%  │  320px         │ Minimum Mobile (WCAG Reflow) │
+// │  300%  │  426px         │ Standard Smartphone          │
+// │ ~250%  │  576px         │ Mobile Layout Ceiling        │
+// │  200%  │  640px         │ Large Mobile / Phablet       │
+// │ ~166%  │  768px         │ Tablet Common                │
+// │  150%  │  853px         │ Tablet Portrait              │
+// │ ~130%  │  992px         │ Tablet Landscape             │
+// │  125%  │ 1024px         │ Small Desktop                │
+// │ ~107%  │ 1200px         │ Desktop                      │
+// │  100%  │ 1280px         │ Base Desktop (Wide)          │
+// │   —    │ 1536px         │ Ultra-wide                   │
+// └────────┴────────────────┴──────────────────────────────┘
+//
+// PRIMARY LAYOUT ZONES (LinkedIn-style):
+//   Mobile Layout:   0px  – 576px  (250%–400% zoom)
+//   Tablet Layout:   576px – 992px (130%–225% zoom)
+//   Desktop Layout:  992px+        (100% standard view)
+// ─────────────────────────────────────────────────────────
+
+// ── Breakpoint Map ────────────────────────────────────────
+$breakpoints: (
+  'min-mobile':       320px,   // 400% zoom — WCAG Reflow
+  'smartphone':       426px,   // 300% zoom
+  'mobile':           576px,   // ~250% zoom — mobile ceiling
+  'phablet':          640px,   // 200% zoom
+  'tablet':           768px,   // ~166% zoom
+  'tablet-portrait':  853px,   // 150% zoom
+  'tablet-landscape': 992px,   // ~130% zoom
+  'small-desktop':   1024px,   // 125% zoom
+  'desktop':         1200px,   // ~107% zoom
+  'wide':            1280px,   // 100% zoom — base
+  'ultrawide':       1536px,   // ultra-wide monitors
+);
+
+// ── Primary Layout Zones ──────────────────────────────────
+// These match the 3 major layout tiers in the reference:
+//   • Mobile:  0–576px    (single column, bottom nav)
+//   • Tablet:  576–992px  (condensed sidebars)
+//   • Desktop: 992px+     (full 3-column layout)
+
+$layout-mobile-max:  575px;
+$layout-tablet-min:  576px;
+$layout-tablet-max:  991px;
+$layout-desktop-min: 992px;
+
+@use 'sass:map';
+
+// ── Mixin: min-width (mobile-first) ──────────────────────
+// Usage: @include breakpoint-up('tablet') { ... }
+@mixin breakpoint-up($name) {
+  $value: map.get($breakpoints, $name);
+  @if $value {
+    @media (min-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn 'Unknown breakpoint: #{$name}';
+  }
+}
+
+// ── Mixin: max-width ─────────────────────────────────────
+// Usage: @include breakpoint-down('mobile') { ... }
+@mixin breakpoint-down($name) {
+  $value: map.get($breakpoints, $name);
+  @if $value {
+    @media (max-width: ($value - 1px)) {
+      @content;
+    }
+  } @else {
+    @warn 'Unknown breakpoint: #{$name}';
+  }
+}
+
+// ── Mixin: between two breakpoints ───────────────────────
+// Usage: @include breakpoint-between('mobile', 'tablet-landscape') { ... }
+@mixin breakpoint-between($min-name, $max-name) {
+  $min: map.get($breakpoints, $min-name);
+  $max: map.get($breakpoints, $max-name);
+  @if $min and $max {
+    @media (min-width: $min) and (max-width: ($max - 1px)) {
+      @content;
+    }
+  } @else {
+    @warn 'Unknown breakpoints: #{$min-name} / #{$max-name}';
+  }
+}
+
+// ── Layout Zone Mixins ───────────────────────────────────
+// These correspond to the 3 primary layout zones.
+
+/// Mobile layout only (0 – 575px)
+/// Single column, bottom tab bar / compact header
+@mixin layout-mobile {
+  @media (max-width: $layout-mobile-max) {
+    @content;
+  }
+}
+
+/// Tablet layout only (576px – 991px)
+/// Condensed sidebars, may stack below main feed
+@mixin layout-tablet {
+  @media (min-width: $layout-tablet-min) and (max-width: $layout-tablet-max) {
+    @content;
+  }
+}
+
+/// Desktop layout (992px+)
+/// Full 3-column experience with side rails
+@mixin layout-desktop {
+  @media (min-width: $layout-desktop-min) {
+    @content;
+  }
+}
+
+// ── Mixin: WCAG Reflow ──────────────────────────────────
+/// Target the minimum 320px CSS-pixel width required
+/// by WCAG 2.1 SC 1.4.10 (Reflow) at 400% zoom.
+@mixin wcag-reflow {
+  @media (max-width: 319px) {
+    @content;
+  }
+}
+
+// ── Mixin: Zoom-level detection (approximate) ────────────
+/// Targets a specific effective viewport caused by zoom.
+/// Usage: @include at-zoom('200') { ... }
+///
+/// NOTE: Browser zoom changes effective viewport width,
+/// so these are just min-width / max-width ranges.
+@mixin at-zoom($level) {
+  @if $level == '400' {
+    // 320px effective
+    @media (max-width: 359px) { @content; }
+  } @else if $level == '300' {
+    // 426px effective
+    @media (min-width: 360px) and (max-width: 479px) { @content; }
+  } @else if $level == '200' {
+    // 640px effective
+    @media (min-width: 576px) and (max-width: 767px) { @content; }
+  } @else if $level == '150' {
+    // 853px effective
+    @media (min-width: 768px) and (max-width: 991px) { @content; }
+  } @else if $level == '125' {
+    // 1024px effective
+    @media (min-width: 992px) and (max-width: 1199px) { @content; }
+  } @else if $level == '100' {
+    // 1280px effective
+    @media (min-width: 1200px) { @content; }
+  } @else {
+    @warn 'Unknown zoom level: #{$level}. Use 100, 125, 150, 200, 300, or 400.';
+  }
+}
+
+// ── Mixin: Print ─────────────────────────────────────────
+@mixin print {
+  @media print {
+    @content;
+  }
+}
+
+// ── Mixin: Reduced motion ────────────────────────────────
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+// ── Mixin: High contrast ─────────────────────────────────
+@mixin high-contrast {
+  @media (forced-colors: active) {
+    @content;
+  }
+}

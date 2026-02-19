@@ -1,0 +1,75 @@
+<div class="toc-feature">
+  <!-- Course Header -->
+  <section class="course-header">
+    <div class="header-content">
+      <mat-chip-set>
+        <mat-chip>{{ course.category }}</mat-chip>
+        <mat-chip>{{ course.level }}</mat-chip>
+      </mat-chip-set>
+      <h1 class="course-title">{{ course.title }}</h1>
+      <p class="course-provider">{{ course.provider }}</p>
+      <p class="course-description">{{ course.description }}</p>
+      <div class="course-meta">
+        <span><mat-icon inline>schedule</mat-icon> {{ course.duration }}</span>
+        <span><mat-icon inline>language</mat-icon> {{ course.language }}</span>
+        <span><mat-icon inline>star</mat-icon> {{ course.rating }} rating</span>
+        <span><mat-icon inline>people</mat-icon> {{ course.enrolled | number }} enrolled</span>
+        <span><mat-icon inline>update</mat-icon> Updated {{ course.lastUpdated }}</span>
+      </div>
+      <div class="header-actions">
+        <button mat-flat-button color="primary" class="enroll-btn">
+          <mat-icon>play_arrow</mat-icon> Continue Learning
+        </button>
+        <button mat-stroked-button>
+          <mat-icon>bookmark_border</mat-icon> Bookmark
+        </button>
+        <button mat-stroked-button>
+          <mat-icon>share</mat-icon> Share
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Table of Contents -->
+  <section class="toc-section">
+    <h2 class="section-title">Course Content</h2>
+    <p class="section-subtitle">{{ modules.length }} modules · {{ course.duration }} total</p>
+
+    <mat-accordion multi>
+      <mat-expansion-panel *ngFor="let mod of modules; let i = index">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="module-title">
+            <mat-icon *ngIf="mod.completed" class="module-done">check_circle</mat-icon>
+            <mat-icon *ngIf="!mod.completed" class="module-pending">radio_button_unchecked</mat-icon>
+            {{ mod.title }}
+          </mat-panel-title>
+          <mat-panel-description class="module-meta">
+            {{ mod.duration }}
+            <mat-progress-bar mode="determinate" [value]="getModuleProgress(mod)" class="module-progress"></mat-progress-bar>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="lessons-list">
+          <div *ngFor="let lesson of mod.lessons" class="lesson-item" [class.completed]="lesson.completed">
+            <mat-icon class="lesson-status" [class.done]="lesson.completed">
+              {{ lesson.completed ? 'check_circle' : 'radio_button_unchecked' }}
+            </mat-icon>
+            <mat-icon class="lesson-type-icon">{{ getLessonIcon(lesson.type) }}</mat-icon>
+            <div class="lesson-details">
+              <span class="lesson-title">{{ lesson.title }}</span>
+              <span class="lesson-meta">{{ lesson.type | titlecase }} · {{ lesson.duration }}</span>
+            </div>
+            <button mat-icon-button>
+              <mat-icon>{{ lesson.completed ? 'replay' : 'play_arrow' }}</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <div class="mfe-badge">
+    <mat-icon>extension</mat-icon>
+    <span>Angular 20 MFE — TOC Feature</span>
+  </div>
+</div>

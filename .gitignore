@@ -1,0 +1,66 @@
+# ── Node ─────────────────────────────────────────────
+node_modules
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.pnp
+.pnp.js
+
+# ── Build output ──────────────────────────────────────
+dist/
+out-tsc/
+/tmp
+
+# ── Angular cache ─────────────────────────────────────
+.angular/
+
+# ── ng-packagr (library builds) ──────────────────────
+igot-design-system/dist/
+
+# ── Environment / secrets ────────────────────────────
+# Keep environment.ts (dev defaults) but ignore prod secrets if any
+# src/environments/environment.prod.ts  # uncomment if prod has real secrets
+
+# ── IDE / Editor ─────────────────────────────────────
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.sublime-workspace
+.history/
+
+# ── OS ────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ── Test / Coverage ──────────────────────────────────
+coverage/
+.nyc_output/
+
+# ── Misc ─────────────────────────────────────────────
+*.log
+*.pid
+*.seed
+*.pid.lock
+.sass-cache/
+connect.lock
+libpeerconnection.log
+testem.log
+typings/
+chrome-profiler-events.json
+speed-measure-plugin.json

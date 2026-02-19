@@ -1,0 +1,192 @@
+.toc-feature {
+  font-family: 'Lato', 'Roboto', sans-serif;
+  color: #333;
+}
+
+.course-header {
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
+  color: #fff;
+  padding: 2rem;
+
+  .header-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .course-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0.75rem 0 0.25rem;
+  }
+
+  .course-provider {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin: 0 0 0.5rem;
+  }
+
+  .course-description {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    line-height: 1.5;
+    margin: 0 0 1rem;
+  }
+
+  .course-meta {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      opacity: 0.85;
+
+      mat-icon {
+        font-size: 0.9rem;
+        width: 0.9rem;
+        height: 0.9rem;
+      }
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+
+    button {
+      color: #fff;
+
+      &[mat-stroked-button] {
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+}
+
+.toc-section {
+  max-width: 900px;
+  margin: 1.5rem auto;
+  padding: 0 2rem;
+
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.85rem;
+    color: #888;
+    margin: 0 0 1rem;
+  }
+}
+
+.module-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+
+  .module-done {
+    color: #4caf50;
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .module-pending {
+    color: #bbb;
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.module-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: #888;
+
+  .module-progress {
+    width: 80px;
+  }
+}
+
+.lessons-list {
+  .lesson-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &.completed {
+      opacity: 0.7;
+
+      .lesson-title {
+        text-decoration: line-through;
+      }
+    }
+
+    .lesson-status {
+      font-size: 1.125rem;
+      width: 1.125rem;
+      height: 1.125rem;
+      color: #bbb;
+
+      &.done {
+        color: #4caf50;
+      }
+    }
+
+    .lesson-type-icon {
+      color: #666;
+      font-size: 1.25rem;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .lesson-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+
+      .lesson-title {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      .lesson-meta {
+        font-size: 0.75rem;
+        color: #999;
+      }
+    }
+  }
+}
+
+.mfe-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  margin: 1rem 2rem;
+  background: #e8f5e9;
+  border: 1px dashed #4caf50;
+  border-radius: 8px;
+  color: #2e7d32;
+  font-size: 0.8rem;
+  font-weight: 500;
+}

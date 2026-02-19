@@ -1,0 +1,170 @@
+// ─────────────────────────────────────────────────────────
+// Responsive Utilities — igot-design-system
+// ─────────────────────────────────────────────────────────
+// Utility classes for responsive visibility, layout zones,
+// and zoom-aware adaptations. Works alongside Tailwind.
+// ─────────────────────────────────────────────────────────
+
+@use './breakpoints' as bp;
+
+// ── Responsive Visibility ─────────────────────────────────
+// Show/hide elements based on layout zones
+
+.hide-on-mobile {
+  @include bp.layout-mobile {
+    display: none !important;
+  }
+}
+
+.hide-on-tablet {
+  @include bp.layout-tablet {
+    display: none !important;
+  }
+}
+
+.hide-on-desktop {
+  @include bp.layout-desktop {
+    display: none !important;
+  }
+}
+
+.show-on-mobile {
+  display: none !important;
+  @include bp.layout-mobile {
+    display: block !important;
+  }
+}
+
+.show-on-tablet {
+  display: none !important;
+  @include bp.layout-tablet {
+    display: block !important;
+  }
+}
+
+.show-on-desktop {
+  display: none !important;
+  @include bp.layout-desktop {
+    display: block !important;
+  }
+}
+
+// ── Responsive Container ──────────────────────────────────
+// Fluid container that respects zoom breakpoints
+.container-responsive {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+
+  @include bp.breakpoint-up('mobile') {
+    max-width: 540px;
+  }
+
+  @include bp.breakpoint-up('phablet') {
+    max-width: 620px;
+  }
+
+  @include bp.breakpoint-up('tablet') {
+    max-width: 720px;
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+
+  @include bp.breakpoint-up('tablet-landscape') {
+    max-width: 960px;
+  }
+
+  @include bp.breakpoint-up('small-desktop') {
+    max-width: 1000px;
+  }
+
+  @include bp.breakpoint-up('desktop') {
+    max-width: 1140px;
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+
+  @include bp.breakpoint-up('wide') {
+    max-width: var(--container-max-width);
+  }
+}
+
+// ── Responsive Text Sizing ────────────────────────────────
+// Fluid typography that scales with breakpoints
+
+.text-responsive-display {
+  font-size: var(--text-3xl);    // 32px mobile
+  line-height: var(--leading-tight);
+
+  @include bp.breakpoint-up('tablet') {
+    font-size: var(--text-5xl);  // 40px tablet
+  }
+
+  @include bp.breakpoint-up('desktop') {
+    font-size: var(--text-7xl);  // 48px desktop
+  }
+}
+
+.text-responsive-heading {
+  font-size: var(--text-xl);     // 24px mobile
+  line-height: var(--leading-tight);
+
+  @include bp.breakpoint-up('tablet') {
+    font-size: var(--text-3xl);  // 32px tablet
+  }
+
+  @include bp.breakpoint-up('desktop') {
+    font-size: var(--text-4xl);  // 36px desktop
+  }
+}
+
+.text-responsive-subheading {
+  font-size: var(--text-lg);     // 20px mobile
+
+  @include bp.breakpoint-up('tablet') {
+    font-size: var(--text-xl);   // 24px tablet
+  }
+
+  @include bp.breakpoint-up('desktop') {
+    font-size: var(--text-2xl);  // 28px desktop
+  }
+}
+
+.text-responsive-body {
+  font-size: var(--text-sm);     // 14px mobile
+
+  @include bp.breakpoint-up('tablet') {
+    font-size: var(--text-base); // 16px tablet+
+  }
+}
+
+// ── WCAG Reflow Safeguards ────────────────────────────────
+// At 400% zoom (320px effective), ensure content reflows
+// into a single column with no horizontal scroll.
+@include bp.at-zoom('400') {
+  .layout-sidebar,
+  .layout-rail {
+    display: none !important;
+  }
+
+  .layout-main {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: var(--space-2) !important;
+    padding-right: var(--space-2) !important;
+  }
+}
+
+// ── Reduced Motion ────────────────────────────────────────
+@include bp.reduced-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,13 @@
+// ─────────────────────────────────────────────────────────
+// igot-design-system — Global Style Entry Point
+// ─────────────────────────────────────────────────────────
+// This file is included in angular.json styles array.
+// Load order matters:
+//   tokens → theme → breakpoints → typography → responsive
+// ─────────────────────────────────────────────────────────
+
+@use './tokens';
+@use './theme';
+@use './breakpoints';
+@use './typography';
+@use './responsive';

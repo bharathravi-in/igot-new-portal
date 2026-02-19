@@ -1,0 +1,204 @@
+<!-- ─── Toolbar ─── -->
+<!-- Sticky header — collapses to compact on mobile (< 576px) -->
+<mat-toolbar color="primary" class="sticky top-0 z-50">
+  <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-2 md:px-4">
+    <div class="flex items-center gap-2 md:gap-3">
+      <mat-icon class="text-xl md:text-3xl">school</mat-icon>
+      <span class="text-base font-semibold tracking-tight md:text-lg 3xl:text-xl">
+        iGOT Karmayogi
+      </span>
+    </div>
+
+    <div class="flex items-center gap-1 md:gap-2">
+      <button mat-icon-button aria-label="Toggle dark mode" (click)="themeService.toggle()">
+        <mat-icon>
+          {{ themeService.darkMode() ? 'light_mode' : 'dark_mode' }}
+        </mat-icon>
+      </button>
+      <!-- Profile button hidden below 576px (mobile layout) -->
+      <button mat-stroked-button class="hidden md:inline-flex">
+        <mat-icon>person</mat-icon>
+        <span class="ml-1">My Profile</span>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
+
+<!-- ─── Hero Section ─── -->
+<ds-page-container>
+  <ds-section-container>
+    <div class="flex flex-col items-center text-center 3xl:items-start 3xl:text-left">
+      <!-- h1 uses responsive typography from design system:
+           32px mobile → 40px tablet → 48px desktop -->
+      <h1 class="font-extrabold tracking-tight">
+        Empower Your
+        <span class="text-primary">Learning Journey</span>
+      </h1>
+
+      <!-- Body text: 14px mobile → 16px tablet+ -->
+      <p class="text-responsive-body mt-3 max-w-2xl md:mt-4 text-text-secondary">
+        Discover curated courses designed for government officials and public servants.
+        Build competencies that drive India's digital transformation.
+      </p>
+
+      <div class="mt-5 flex flex-wrap gap-2 md:mt-8 md:gap-3">
+        <button mat-raised-button color="primary">
+          <mat-icon>explore</mat-icon>
+          <span class="hidden sm:inline">Explore Courses</span>
+          <span class="sm:hidden">Explore</span>
+        </button>
+        <button mat-stroked-button color="accent">
+          <mat-icon>play_circle</mat-icon>
+          <span class="hidden sm:inline">Continue Learning</span>
+          <span class="sm:hidden">Continue</span>
+        </button>
+      </div>
+    </div>
+  </ds-section-container>
+</ds-page-container>
+
+<mat-divider />
+
+<!-- ─── Course Catalog ─── -->
+<!-- Grid: 1col mobile → 2col at 576px → 3col at 992px -->
+<ds-page-container>
+  <ds-section-container>
+    <div class="mb-4 flex items-center justify-between md:mb-6">
+      <h2 class="font-bold">Featured Courses</h2>
+      <button mat-button color="primary" class="hidden md:inline-flex">
+        View All
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+      <!-- Compact button for mobile -->
+      <button mat-icon-button color="primary" class="md:hidden" aria-label="View All">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+
+    <ds-responsive-grid [columns]="3">
+      @for (course of courses; track course.title) {
+        <mat-card class="flex h-full flex-col transition-shadow hover:shadow-lg">
+          <mat-card-header>
+            <mat-card-title class="text-base 3xl:text-lg">{{ course.title }}</mat-card-title>
+            <mat-card-subtitle>{{ course.category }}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content class="flex-1 py-3 md:py-4">
+            <p class="text-sm leading-relaxed text-text-secondary">
+              {{ course.description }}
+            </p>
+          </mat-card-content>
+
+          <mat-card-actions class="flex items-center justify-between px-3 pb-3 md:px-4 md:pb-4">
+            <div class="flex gap-2">
+              <mat-chip-set>
+                <mat-chip>{{ course.duration }}</mat-chip>
+                <mat-chip highlighted>{{ course.level }}</mat-chip>
+              </mat-chip-set>
+            </div>
+            <button mat-icon-button color="primary" aria-label="Enroll">
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </ds-responsive-grid>
+  </ds-section-container>
+</ds-page-container>
+
+<!-- ─── Breakpoint Reference (dev only, remove in prod) ─── -->
+<ds-page-container>
+  <ds-section-container>
+    <h3 class="font-semibold mb-4">Responsive Breakpoint Reference</h3>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b-2 border-border-primary text-left">
+            <th class="py-2 pr-4 font-semibold">Zoom Level</th>
+            <th class="py-2 pr-4 font-semibold">Eff. Width</th>
+            <th class="py-2 pr-4 font-semibold">Tailwind</th>
+            <th class="py-2 font-semibold">Layout</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (bp of breakpoints; track bp.zoom) {
+            <tr class="border-b border-border-primary">
+              <td class="py-2 pr-4 font-medium">{{ bp.zoom }}</td>
+              <td class="py-2 pr-4">{{ bp.width }}</td>
+              <td class="py-2 pr-4">
+                <code class="text-xs rounded px-1.5 py-0.5 bg-bg-tertiary text-primary">
+                  {{ bp.tw }}
+                </code>
+              </td>
+              <td class="py-2">{{ bp.layout }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="font-semibold mt-6 mb-3">Font Size Scale</h4>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b-2 border-border-primary text-left">
+            <th class="py-2 pr-4 font-semibold">Pixel</th>
+            <th class="py-2 pr-4 font-semibold">Percentage</th>
+            <th class="py-2 pr-4 font-semibold">rem</th>
+            <th class="py-2 font-semibold">CSS Var</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (fs of fontSizes; track fs.px) {
+            <tr class="border-b border-border-primary">
+              <td class="py-2 pr-4">{{ fs.px }}</td>
+              <td class="py-2 pr-4 font-medium">{{ fs.pct }}</td>
+              <td class="py-2 pr-4">{{ fs.rem }}</td>
+              <td class="py-2">
+                <code class="text-xs rounded px-1.5 py-0.5 bg-bg-tertiary text-primary">
+                  {{ fs.cssVar }}
+                </code>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </ds-section-container>
+</ds-page-container>
+
+<!-- ─── Bottom Navigation (mobile only — visible below 576px) ─── -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 flex md:hidden items-center justify-around
+            border-t border-border-primary bg-bg-primary py-2"
+     style="height: var(--bottom-nav-height)">
+  <button mat-icon-button aria-label="Home">
+    <mat-icon>home</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Search">
+    <mat-icon>search</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="My Learning">
+    <mat-icon>school</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Profile">
+    <mat-icon>person</mat-icon>
+  </button>
+</nav>
+
+<!-- ─── Footer (hidden on mobile, shown on tablet+) ─── -->
+<footer class="mt-auto border-t border-border-primary hidden md:block">
+  <ds-page-container>
+    <div class="flex flex-col items-center justify-between gap-4 py-6 3xl:flex-row 3xl:py-8">
+      <p class="text-sm text-text-secondary">
+        &copy; 2026 iGOT Karmayogi &mdash; Ministry of Personnel, Government of India
+      </p>
+      <div class="flex gap-4 text-sm text-text-secondary">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </ds-page-container>
+</footer>

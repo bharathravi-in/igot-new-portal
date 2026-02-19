@@ -1,0 +1,92 @@
+<div class="profile-feature">
+  <!-- Profile Header -->
+  <section class="profile-header">
+    <div class="profile-avatar">
+      <mat-icon class="avatar-icon">account_circle</mat-icon>
+    </div>
+    <div class="profile-info">
+      <h1 class="user-name">{{ user.name }}</h1>
+      <p class="user-designation">{{ user.designation }}</p>
+      <p class="user-department">{{ user.department }}</p>
+      <div class="profile-meta">
+        <span><mat-icon inline>email</mat-icon> {{ user.email }}</span>
+        <span><mat-icon inline>location_on</mat-icon> {{ user.location }}</span>
+        <span><mat-icon inline>calendar_today</mat-icon> Joined {{ user.joinedDate }}</span>
+      </div>
+    </div>
+    <button mat-stroked-button class="edit-btn">
+      <mat-icon>edit</mat-icon> Edit Profile
+    </button>
+  </section>
+
+  <!-- Stats Cards -->
+  <section class="stats-section">
+    <mat-card class="stat-card" appearance="outlined">
+      <mat-card-content>
+        <mat-icon class="stat-icon completed">check_circle</mat-icon>
+        <div class="stat-value">{{ user.completedCourses }}</div>
+        <div class="stat-label">Completed</div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="stat-card" appearance="outlined">
+      <mat-card-content>
+        <mat-icon class="stat-icon in-progress">pending</mat-icon>
+        <div class="stat-value">{{ user.inProgressCourses }}</div>
+        <div class="stat-label">In Progress</div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="stat-card" appearance="outlined">
+      <mat-card-content>
+        <mat-icon class="stat-icon hours">schedule</mat-icon>
+        <div class="stat-value">{{ user.totalHours }}</div>
+        <div class="stat-label">Hours Learned</div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="stat-card" appearance="outlined">
+      <mat-card-content>
+        <mat-icon class="stat-icon certs">workspace_premium</mat-icon>
+        <div class="stat-value">{{ user.certificates }}</div>
+        <div class="stat-label">Certificates</div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- Tabs -->
+  <mat-tab-group class="profile-tabs">
+    <!-- Competencies Tab -->
+    <mat-tab label="Competencies">
+      <div class="tab-content">
+        <div class="competency-list">
+          <div *ngFor="let comp of competencies" class="competency-item">
+            <div class="competency-header">
+              <span class="comp-name">{{ comp.name }}</span>
+              <span class="comp-level">{{ comp.level }}%</span>
+            </div>
+            <mat-progress-bar mode="determinate" [value]="comp.level"></mat-progress-bar>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-- Recent Activity Tab -->
+    <mat-tab label="Recent Activity">
+      <div class="tab-content">
+        <div class="activity-list">
+          <div *ngFor="let activity of recentActivities" class="activity-item">
+            <mat-icon class="activity-icon" [class]="activity.icon">{{ activity.icon }}</mat-icon>
+            <div class="activity-details">
+              <span class="activity-action">{{ activity.action }}</span>
+              <strong>{{ activity.item }}</strong>
+              <span class="activity-date">{{ activity.date }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div class="mfe-badge">
+    <mat-icon>extension</mat-icon>
+    <span>Angular 20 MFE — Profile Feature</span>
+  </div>
+</div>
