@@ -1,0 +1,156 @@
+$nav-bg:     #1c0a3a;   // deep purple — matches iGOT brand
+$nav-border: rgba(255, 255, 255, 0.08);
+$nav-text:   rgba(255, 255, 255, 0.75);
+$nav-active: #fff;
+$accent:     #f5a623;   // iGOT gold accent
+
+.igot-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: $nav-bg;
+  border-bottom: 1px solid $nav-border;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.igot-nav__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+// ── Logo ────────────────────────────────────────────────
+.igot-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+  color: $nav-active;
+
+  &-icon {
+    font-size: 22px;
+  }
+
+  &-text {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+
+    strong {
+      font-weight: 700;
+      color: #fff;
+    }
+  }
+}
+
+// ── Nav Links ────────────────────────────────────────────
+.igot-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.igot-nav__link {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: $nav-text;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $nav-active;
+  }
+
+  &--active {
+    background: rgba(255, 255, 255, 0.12);
+    color: $nav-active;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 14px;
+      right: 14px;
+      height: 2px;
+      background: $accent;
+      border-radius: 2px 2px 0 0;
+    }
+  }
+}
+
+// ── Right side ───────────────────────────────────────────
+.igot-nav__right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.igot-nav__theme-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+  }
+
+  .igot-nav__theme-icon {
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .igot-nav__theme-label {
+    font-size: 12px;
+  }
+}
+
+.igot-nav__classic-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #fff;
+  }
+}

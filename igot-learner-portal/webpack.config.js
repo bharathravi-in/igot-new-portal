@@ -49,6 +49,9 @@ module.exports = (config, options) => {
         './AppModule':           './src/app/app.module.ts',
         './BootstrapComponent':  './src/app/app.component.ts',
 
+        // ── Full-app web component (entire new portal as one element) ──
+        './AppFeature':          './src/app/features/app/entry.ts',
+
         // ── Feature Web Component entries ──────────────────────
         './HomeFeature':         './src/app/features/home/entry.ts',
         './SearchFeature':       './src/app/features/search/entry.ts',

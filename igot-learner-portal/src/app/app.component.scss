@@ -7,3 +7,20 @@
     background-color var(--transition-base),
     color var(--transition-base);
 }
+
+.igot-main {
+  min-height: calc(100vh - 56px - 48px); // viewport minus nav and footer
+}
+
+.igot-footer {
+  background: #1c0a3a;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  padding: 12px 24px;
+  font-size: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  p {
+    margin: 0;
+  }
+}

@@ -1,17 +1,71 @@
-{
-  "/api": {
-    "target": "http://localhost:3000",
+[
+  {
+    "context": ["/apis"],
+    "target": "https://portal.uat.karmayogibharat.net/",
     "secure": false,
-    "changeOrigin": true,
     "logLevel": "debug",
-    "pathRewrite": {
-      "^/api": "/api"
+    "changeOrigin": true,
+    "headers": {
+      "Cookie": "connect.sid=s%3A9fQVESoWKl7avtRqrWmYPUR29kHwm0iw.0qufnxfqcP2cCgiU2gwBFg9m7K%2BDtrcVns5rFBzAFKU"
     }
   },
-  "/assets": {
-    "target": "http://localhost:3000",
+  {
+    "context": ["/api"],
+    "target": "https://portal.uat.karmayogibharat.net/",
     "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  {
+    "context": ["/content-api"],
+    "target": "http://localhost:3004",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  {
+    "context": ["/content-store"],
+    "target": "http://localhost:3005",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  {
+    "context": ["/chat-bot"],
+    "target": "http://localhost:3006",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  {
+    "context": ["/mobile-apps"],
+    "target": "http://localhost:3007",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  {
+    "context": ["/LA"],
+    "target": "http://localhost:3008",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  {
+    "context": ["/assets"],
+    "target": "http://127.0.0.1:8080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  {
+    "context": ["/abcd"],
+    "target": "https://igot-qa.in",
+    "secure": false,
+    "logLevel": "debug",
     "changeOrigin": true,
-    "logLevel": "debug"
+    "pathRewrite": {
+      "^/abcd": ""
+    }
   }
-}
+]

@@ -1,0 +1,40 @@
+<nav class="igot-nav">
+  <div class="igot-nav__inner">
+
+    <!-- Logo -->
+    <a class="igot-nav__logo" routerLink="/home">
+      <span class="igot-nav__logo-icon">🎓</span>
+      <span class="igot-nav__logo-text">iGOT <strong>Karmayogi</strong></span>
+    </a>
+
+    <!-- Nav Links -->
+    <ul class="igot-nav__links">
+      <li *ngFor="let item of navItems">
+        <a
+          [routerLink]="item.path"
+          class="igot-nav__link"
+          [class.igot-nav__link--active]="activeRoute === item.path.slice(1)"
+        >
+          {{ item.label }}
+        </a>
+      </li>
+    </ul>
+
+    <!-- Right side: Theme toggle + Classic UI button -->
+    <div class="igot-nav__right">
+      <button
+        class="igot-nav__theme-btn"
+        (click)="themeService.toggle()"
+        [title]="themeService.darkMode() ? 'Switch to Light mode' : 'Switch to Dark mode'"
+        [attr.aria-label]="themeService.darkMode() ? 'Switch to Light mode' : 'Switch to Dark mode'"
+      >
+        <span class="igot-nav__theme-icon">{{ themeService.darkMode() ? '☀️' : '🌙' }}</span>
+        <span class="igot-nav__theme-label">{{ themeService.darkMode() ? 'Light' : 'Dark' }}</span>
+      </button>
+      <button class="igot-nav__classic-btn" (click)="goClassic()" title="Switch to Classic UI">
+        ⇄ Classic UI
+      </button>
+    </div>
+
+  </div>
+</nav>
