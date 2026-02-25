@@ -1,62 +1,46 @@
 // ─────────────────────────────────────────────────────────
 // Breakpoints & Responsive Mixins — igot-design-system
 // ─────────────────────────────────────────────────────────
+// Sourced from igot_design_data_knowledge/Screen_Size
 //
-// Zoom-aware breakpoint system based on effective viewport
-// widths at different browser zoom levels on a 1280px screen.
-//
-// ┌────────┬────────────────┬──────────────────────────────┐
-// │  Zoom  │ Eff. Width     │ Layout                       │
-// ├────────┼────────────────┼──────────────────────────────┤
-// │  400%  │  320px         │ Minimum Mobile (WCAG Reflow) │
-// │  300%  │  426px         │ Standard Smartphone          │
-// │ ~250%  │  576px         │ Mobile Layout Ceiling        │
-// │  200%  │  640px         │ Large Mobile / Phablet       │
-// │ ~166%  │  768px         │ Tablet Common                │
-// │  150%  │  853px         │ Tablet Portrait              │
-// │ ~130%  │  992px         │ Tablet Landscape             │
-// │  125%  │ 1024px         │ Small Desktop                │
-// │ ~107%  │ 1200px         │ Desktop                      │
-// │  100%  │ 1280px         │ Base Desktop (Wide)          │
-// │   —    │ 1536px         │ Ultra-wide                   │
-// └────────┴────────────────┴──────────────────────────────┘
-//
-// PRIMARY LAYOUT ZONES (LinkedIn-style):
-//   Mobile Layout:   0px  – 576px  (250%–400% zoom)
-//   Tablet Layout:   576px – 992px (130%–225% zoom)
-//   Desktop Layout:  992px+        (100% standard view)
+// ┌──────────────────────────┬───────────┬───────────┐
+// │  Breakpoint              │  Min      │  Max      │
+// ├──────────────────────────┼───────────┼───────────┤
+// │  Mobile                  │  320px    │  425px    │
+// │  Tablet Portrait         │  426px    │  1023px   │
+// │  Tablet Landscape        │  649px    │  1365px   │
+// │  Small Desktop           │  1024px   │  1339px   │
+// │  Large Desktop           │  1440px   │  1919px   │
+// │  Extra Large Desktop     │  1920px   │  beyond   │
+// └──────────────────────────┴───────────┴───────────┘
 // ─────────────────────────────────────────────────────────
-
-// ── Breakpoint Map ────────────────────────────────────────
-$breakpoints: (
-  'min-mobile':       320px,   // 400% zoom — WCAG Reflow
-  'smartphone':       426px,   // 300% zoom
-  'mobile':           576px,   // ~250% zoom — mobile ceiling
-  'phablet':          640px,   // 200% zoom
-  'tablet':           768px,   // ~166% zoom
-  'tablet-portrait':  853px,   // 150% zoom
-  'tablet-landscape': 992px,   // ~130% zoom
-  'small-desktop':   1024px,   // 125% zoom
-  'desktop':         1200px,   // ~107% zoom
-  'wide':            1280px,   // 100% zoom — base
-  'ultrawide':       1536px,   // ultra-wide monitors
-);
-
-// ── Primary Layout Zones ──────────────────────────────────
-// These match the 3 major layout tiers in the reference:
-//   • Mobile:  0–576px    (single column, bottom nav)
-//   • Tablet:  576–992px  (condensed sidebars)
-//   • Desktop: 992px+     (full 3-column layout)
-
-$layout-mobile-max:  575px;
-$layout-tablet-min:  576px;
-$layout-tablet-max:  991px;
-$layout-desktop-min: 992px;
 
 @use 'sass:map';
 
+// ── Breakpoint Map (min-width, mobile-first) ──────────────
+$breakpoints: (
+  'min-mobile':        320px,
+  'tablet-portrait':   426px,
+  'tablet-landscape':  649px,
+  'small-desktop':    1024px,
+  'large-desktop':    1440px,
+  'extra-large':      1920px,
+);
+
+// ── Primary Layout Zones ──────────────────────────────────
+$layout-mobile-max:            425px;
+$layout-tablet-portrait-min:   426px;
+$layout-tablet-portrait-max:  1023px;
+$layout-tablet-landscape-min:  649px;
+$layout-tablet-landscape-max: 1365px;
+$layout-small-desktop-min:    1024px;
+$layout-small-desktop-max:    1339px;
+$layout-large-desktop-min:    1440px;
+$layout-large-desktop-max:    1919px;
+$layout-extra-large-min:      1920px;
+
 // ── Mixin: min-width (mobile-first) ──────────────────────
-// Usage: @include breakpoint-up('tablet') { ... }
+// Usage: @include breakpoint-up('tablet-portrait') { ... }
 @mixin breakpoint-up($name) {
   $value: map.get($breakpoints, $name);
   @if $value {
@@ -69,7 +53,7 @@ $layout-desktop-min: 992px;
 }
 
 // ── Mixin: max-width ─────────────────────────────────────
-// Usage: @include breakpoint-down('mobile') { ... }
+// Usage: @include breakpoint-down('tablet-portrait') { ... }
 @mixin breakpoint-down($name) {
   $value: map.get($breakpoints, $name);
   @if $value {
@@ -82,7 +66,7 @@ $layout-desktop-min: 992px;
 }
 
 // ── Mixin: between two breakpoints ───────────────────────
-// Usage: @include breakpoint-between('mobile', 'tablet-landscape') { ... }
+// Usage: @include breakpoint-between('tablet-portrait', 'small-desktop') { ... }
 @mixin breakpoint-between($min-name, $max-name) {
   $min: map.get($breakpoints, $min-name);
   $max: map.get($breakpoints, $max-name);
@@ -96,68 +80,46 @@ $layout-desktop-min: 992px;
 }
 
 // ── Layout Zone Mixins ───────────────────────────────────
-// These correspond to the 3 primary layout zones.
 
-/// Mobile layout only (0 – 575px)
-/// Single column, bottom tab bar / compact header
+/// Mobile only (320px – 425px)
 @mixin layout-mobile {
-  @media (max-width: $layout-mobile-max) {
+  @media (min-width: 320px) and (max-width: $layout-mobile-max) {
     @content;
   }
 }
 
-/// Tablet layout only (576px – 991px)
-/// Condensed sidebars, may stack below main feed
-@mixin layout-tablet {
-  @media (min-width: $layout-tablet-min) and (max-width: $layout-tablet-max) {
+/// Tablet Portrait only (426px – 1023px)
+@mixin layout-tablet-portrait {
+  @media (min-width: $layout-tablet-portrait-min) and (max-width: $layout-tablet-portrait-max) {
     @content;
   }
 }
 
-/// Desktop layout (992px+)
-/// Full 3-column experience with side rails
-@mixin layout-desktop {
-  @media (min-width: $layout-desktop-min) {
+/// Tablet Landscape only (649px – 1365px)
+@mixin layout-tablet-landscape {
+  @media (min-width: $layout-tablet-landscape-min) and (max-width: $layout-tablet-landscape-max) {
     @content;
   }
 }
 
-// ── Mixin: WCAG Reflow ──────────────────────────────────
-/// Target the minimum 320px CSS-pixel width required
-/// by WCAG 2.1 SC 1.4.10 (Reflow) at 400% zoom.
-@mixin wcag-reflow {
-  @media (max-width: 319px) {
+/// Small Desktop only (1024px – 1339px)
+@mixin layout-small-desktop {
+  @media (min-width: $layout-small-desktop-min) and (max-width: $layout-small-desktop-max) {
     @content;
   }
 }
 
-// ── Mixin: Zoom-level detection (approximate) ────────────
-/// Targets a specific effective viewport caused by zoom.
-/// Usage: @include at-zoom('200') { ... }
-///
-/// NOTE: Browser zoom changes effective viewport width,
-/// so these are just min-width / max-width ranges.
-@mixin at-zoom($level) {
-  @if $level == '400' {
-    // 320px effective
-    @media (max-width: 359px) { @content; }
-  } @else if $level == '300' {
-    // 426px effective
-    @media (min-width: 360px) and (max-width: 479px) { @content; }
-  } @else if $level == '200' {
-    // 640px effective
-    @media (min-width: 576px) and (max-width: 767px) { @content; }
-  } @else if $level == '150' {
-    // 853px effective
-    @media (min-width: 768px) and (max-width: 991px) { @content; }
-  } @else if $level == '125' {
-    // 1024px effective
-    @media (min-width: 992px) and (max-width: 1199px) { @content; }
-  } @else if $level == '100' {
-    // 1280px effective
-    @media (min-width: 1200px) { @content; }
-  } @else {
-    @warn 'Unknown zoom level: #{$level}. Use 100, 125, 150, 200, 300, or 400.';
+/// Large Desktop only (1440px – 1919px)
+@mixin layout-large-desktop {
+  @media (min-width: $layout-large-desktop-min) and (max-width: $layout-large-desktop-max) {
+    @content;
+  }
+}
+
+/// Extra Large Desktop (1920px+)
+@mixin layout-extra-large {
+  @media (min-width: $layout-extra-large-min) {
+    @content;
   }
 }
 

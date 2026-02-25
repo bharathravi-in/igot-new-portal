@@ -1,29 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routes';
 import { IgotDesignSystemModule } from '@igot/design-system';
+import { IgotLocalizationModule } from '@igot/localization';
 
 /**
- * AppModule — NgModule wrapper for Module Federation compatibility.
+ * AppModule — NgModule exposed via Module Federation for Angular 16 host.
  *
  * The Angular 16 host loads this module via:
  *   loadRemoteModule({ remoteName: 'igotLearnerPortal', exposedModule: './AppModule' })
  *
- * Internally all components are standalone; this module simply
- * bootstraps and declares the routing tree.
+ * Bootstrapping is handled by bootstrapApplication() in bootstrap.ts.
+ * This module only exists so the MFE host can import routes + shared providers.
  */
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     RouterModule.forRoot(APP_ROUTES),
     IgotDesignSystemModule,
-    AppComponent,
+    IgotLocalizationModule,
   ],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

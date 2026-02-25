@@ -23,6 +23,12 @@
     "@angular/platform-browser": "^20.0.0",
     "@angular/platform-browser-dynamic": "^20.0.0",
     "@angular/router": "^20.0.0",
+    "@babel/runtime": "^7.28.6",
+    "@igot/design-system": "file:../igot-design-system",
+    "@igot/localization": "file:../igot-localization",
+    "@igot/ui-components": "file:../igot-ui-components",
+    "@ngx-translate/core": "^16.0.4",
+    "@ngx-translate/http-loader": "^16.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.6.0",
     "zone.js": "~0.15.0"
@@ -38,10 +44,10 @@
     "@angular/cli": "^20.0.0",
     "@angular/compiler-cli": "^20.0.0",
     "@types/node": "^22.0.0",
-    "autoprefixer": "^10.4.0",
+    "autoprefixer": "^10.4.24",
     "eslint": "^9.0.0",
-    "postcss": "^8.4.0",
-    "tailwindcss": "^3.4.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19",
     "typescript": "~5.8.0",
     "webpack": "^5.105.2"
   }

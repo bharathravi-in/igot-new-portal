@@ -1,9 +1,8 @@
 /**
  * Module Federation configuration for igot-learner-portal (Remote).
  *
- * IMPORTANT: We resolve ModuleFederationPlugin from Angular's bundled
- * webpack (inside @angular-devkit/build-angular) to avoid the dual-webpack
- * Compilation class mismatch with the top-level webpack package.
+ * IMPORTANT: Module Federation Plugin must use the same webpack instance
+ * as Angular's build system to avoid Compilation class mismatches.
  *
  * CROSS-VERSION STRATEGY:
  * This remote (Angular 20) is consumed by an Angular 16 host.
@@ -13,16 +12,7 @@
  * elements with full framework isolation.
  */
 
-// Use Angular's internal webpack to avoid Compilation mismatch
-let ModuleFederationPlugin;
-try {
-  const angularWebpack = require('@angular-devkit/build-angular/node_modules/webpack');
-  ModuleFederationPlugin = angularWebpack.container.ModuleFederationPlugin;
-} catch {
-  // Fallback if Angular doesn't bundle webpack separately
-  ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
-}
-
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const path = require('path');
 
 module.exports = (config, options) => {

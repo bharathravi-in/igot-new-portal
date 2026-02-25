@@ -50,6 +50,141 @@ html {
 @tailwind utilities;
 
 // ─────────────────────────────────────────────────────────
+// CSS Custom Properties — Light Theme (default)
+// ─────────────────────────────────────────────────────────
+:root {
+  // Brand colors
+  --color-primary: #2196f3;
+  --color-primary-hover: #1976d2;
+  --color-primary-light: #e3f2fd;
+  --color-accent: #7c3aed;
+  --color-accent-hover: #6d28d9;
+  --color-accent-light: #ede9fe;
+  --color-warn: #dc2626;
+  --color-warn-hover: #b91c1c;
+  --color-warn-light: #fee2e2;
+  --color-success: #16a34a;
+  --color-success-light: #dcfce7;
+  --color-info: #2563eb;
+  --color-info-light: #dbeafe;
+
+  // Backgrounds
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #eeeeee;
+  --bg-inverse: #212121;
+
+  // Text
+  --text-primary: #212121;
+  --text-secondary: #616161;
+  --text-tertiary: #9e9e9e;
+  --text-inverse: #ffffff;
+
+  // Borders
+  --border-primary: #e0e0e0;
+  --border-secondary: #eeeeee;
+  --border-focus: #2196f3;
+
+  // Shadows
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+
+  // Layout
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --container-max-width: 1280px;
+  --header-height: 64px;
+  --footer-height: 48px;
+}
+
+// ─────────────────────────────────────────────────────────
+// Dark Theme CSS Custom Properties
+// ─────────────────────────────────────────────────────────
+.dark {
+  --color-primary: #64b5f6;
+  --color-primary-hover: #42a5f5;
+  --color-primary-light: #1a237e;
+  --color-accent: #a78bfa;
+  --color-accent-hover: #8b5cf6;
+  --color-accent-light: #312e81;
+  --color-warn: #f87171;
+  --color-warn-hover: #ef4444;
+  --color-warn-light: #7f1d1d;
+  --color-success: #4ade80;
+  --color-success-light: #14532d;
+  --color-info: #60a5fa;
+  --color-info-light: #1e3a5f;
+
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --bg-tertiary: #2d2d2d;
+  --bg-inverse: #ffffff;
+
+  --text-primary: #e0e0e0;
+  --text-secondary: #bdbdbd;
+  --text-tertiary: #757575;
+  --text-inverse: #121212;
+
+  --border-primary: #424242;
+  --border-secondary: #333333;
+  --border-focus: #64b5f6;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.4);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+// ─────────────────────────────────────────────────────────
+// High Contrast Theme
+// ─────────────────────────────────────────────────────────
+.high-contrast {
+  --color-primary: #ffff00;
+  --color-primary-hover: #ffee00;
+  --color-primary-light: #333300;
+  --color-accent: #00ffff;
+  --color-accent-hover: #00cccc;
+  --color-accent-light: #003333;
+  --color-warn: #ff6b6b;
+  --color-warn-hover: #ff4444;
+  --color-warn-light: #660000;
+  --color-success: #00ff00;
+  --color-success-light: #003300;
+  --color-info: #00bfff;
+  --color-info-light: #003355;
+
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #1a1a1a;
+  --bg-inverse: #ffffff;
+
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-tertiary: #cccccc;
+  --text-inverse: #000000;
+
+  --border-primary: #ffffff;
+  --border-secondary: #cccccc;
+  --border-focus: #ffff00;
+
+  // Enforce high contrast on all interactive elements
+  *:focus-visible {
+    outline: 3px solid var(--border-focus) !important;
+    outline-offset: 2px !important;
+  }
+
+  a {
+    text-decoration: underline !important;
+  }
+}
+
+// ─────────────────────────────────────────────────────────
 // Global Styles
 // ─────────────────────────────────────────────────────────
 *,
@@ -71,6 +206,68 @@ body {
     color 0.3s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+// ─────────────────────────────────────────────────────────
+// Focus Styles — WCAG 2.1 AA
+// ─────────────────────────────────────────────────────────
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// ─────────────────────────────────────────────────────────
+// Screen Reader Only Utility (static CSS backup for Tailwind)
+// ─────────────────────────────────────────────────────────
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border-width: 0 !important;
+}
+
+// ─────────────────────────────────────────────────────────
+// Skip to Main Content Link
+// ─────────────────────────────────────────────────────────
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 0.5rem 0.5rem;
+  transition: top 0.2s ease;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+// Reduced Motion — WCAG 2.1 AA §2.3.3
+// ─────────────────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 // ─────────────────────────────────────────────────────────
@@ -112,4 +309,32 @@ a {
 .mat-mdc-mini-fab {
   // Let Material handle its own styling
   letter-spacing: normal;
+}
+
+// ─────────────────────────────────────────────────────────
+// Table Styles
+// ─────────────────────────────────────────────────────────
+.table-striped {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-primary);
+  }
+
+  th {
+    font-weight: 600;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: var(--bg-secondary);
+  }
+
+  tbody tr:hover {
+    background-color: var(--bg-tertiary);
+  }
 }

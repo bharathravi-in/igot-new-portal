@@ -17,3 +17,6 @@ export {
   SectionContainerComponent,
   ResponsiveGridComponent,
 } from './lib/layout/index';
+
+// Design Tokens
+export * from './lib/tokens/index';

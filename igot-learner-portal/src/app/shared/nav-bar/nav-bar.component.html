@@ -1,38 +1,65 @@
-<nav class="igot-nav">
+<nav class="igot-nav" role="navigation" aria-label="Main navigation">
   <div class="igot-nav__inner">
 
+    <!-- Mobile Hamburger -->
+    <button
+      class="igot-nav__hamburger"
+      (click)="toggleMobileMenu()"
+      [attr.aria-expanded]="mobileMenuOpen()"
+      aria-controls="nav-menu"
+      aria-label="Toggle navigation menu"
+    >
+      <mat-icon>{{ mobileMenuOpen() ? 'close' : 'menu' }}</mat-icon>
+    </button>
+
     <!-- Logo -->
-    <a class="igot-nav__logo" routerLink="/home">
-      <span class="igot-nav__logo-icon">🎓</span>
+    <a class="igot-nav__logo" routerLink="/home" aria-label="iGOT Karmayogi - Home">
+      <mat-icon class="igot-nav__logo-icon" aria-hidden="true">school</mat-icon>
       <span class="igot-nav__logo-text">iGOT <strong>Karmayogi</strong></span>
     </a>
 
-    <!-- Nav Links -->
-    <ul class="igot-nav__links">
-      <li *ngFor="let item of navItems">
+    <!-- Nav Links (desktop) -->
+    <ul id="nav-menu" class="igot-nav__links" [class.igot-nav__links--open]="mobileMenuOpen()" role="menubar">
+      <li *ngFor="let item of navItems" role="none">
         <a
           [routerLink]="item.path"
           class="igot-nav__link"
           [class.igot-nav__link--active]="activeRoute === item.path.slice(1)"
+          role="menuitem"
+          [attr.aria-current]="activeRoute === item.path.slice(1) ? 'page' : null"
         >
-          {{ item.label }}
+          <mat-icon class="igot-nav__link-icon" aria-hidden="true">{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
         </a>
       </li>
     </ul>
 
-    <!-- Right side: Theme toggle + Classic UI button -->
+    <!-- Right side: Theme picker + Classic UI button -->
     <div class="igot-nav__right">
+      <!-- Theme Menu -->
       <button
+        mat-icon-button
+        [matMenuTriggerFor]="themeMenu"
+        aria-label="Change theme"
         class="igot-nav__theme-btn"
-        (click)="themeService.toggle()"
-        [title]="themeService.darkMode() ? 'Switch to Light mode' : 'Switch to Dark mode'"
-        [attr.aria-label]="themeService.darkMode() ? 'Switch to Light mode' : 'Switch to Dark mode'"
       >
-        <span class="igot-nav__theme-icon">{{ themeService.darkMode() ? '☀️' : '🌙' }}</span>
-        <span class="igot-nav__theme-label">{{ themeService.darkMode() ? 'Light' : 'Dark' }}</span>
+        <mat-icon>{{ currentThemeIcon }}</mat-icon>
       </button>
-      <button class="igot-nav__classic-btn" (click)="goClassic()" title="Switch to Classic UI">
-        ⇄ Classic UI
+      <mat-menu #themeMenu="matMenu">
+        <button
+          mat-menu-item
+          *ngFor="let opt of themeOptions"
+          (click)="themeService.setTheme(opt.value)"
+          [class.active-theme]="themeService.currentTheme() === opt.value"
+        >
+          <mat-icon>{{ opt.icon }}</mat-icon>
+          <span>{{ opt.label }}</span>
+        </button>
+      </mat-menu>
+
+      <button class="igot-nav__classic-btn" (click)="goClassic()" title="Switch to Classic UI" aria-label="Switch to Classic UI">
+        <mat-icon aria-hidden="true">swap_horiz</mat-icon>
+        <span class="igot-nav__classic-label">Classic UI</span>
       </button>
     </div>
 

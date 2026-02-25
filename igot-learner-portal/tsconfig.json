@@ -23,7 +23,11 @@
     "lib": ["ES2022", "dom"],
     "paths": {
       "@igot/design-system": ["../igot-design-system/src/public-api.ts"],
-      "@igot/design-system/*": ["../igot-design-system/src/*"]
+      "@igot/design-system/*": ["../igot-design-system/src/*"],
+      "@igot/localization": ["../igot-localization/src/public-api.ts"],
+      "@igot/localization/*": ["../igot-localization/src/*"],
+      "@igot/ui-components": ["../igot-ui-components/src/public-api.ts"],
+      "@igot/ui-components/*": ["../igot-ui-components/src/*"]
     }
   },
   "angularCompilerOptions": {

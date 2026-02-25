@@ -4,23 +4,91 @@
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition:
-    background-color var(--transition-base),
-    color var(--transition-base);
+    background-color var(--transition-base, 0.3s ease),
+    color var(--transition-base, 0.3s ease);
 }
 
 .igot-main {
-  min-height: calc(100vh - 56px - 48px); // viewport minus nav and footer
+  min-height: calc(100vh - var(--header-height, 64px) - var(--footer-height, 48px));
+  padding-bottom: 0;
+
+  // Add bottom padding on mobile for bottom nav bar
+  @media (max-width: 767px) {
+    padding-bottom: 56px;
+  }
 }
 
 .igot-footer {
-  background: #1c0a3a;
-  color: rgba(255, 255, 255, 0.5);
+  background: var(--bg-inverse, #1c0a3a);
+  color: var(--text-inverse, rgba(255, 255, 255, 0.5));
   text-align: center;
   padding: 12px 24px;
   font-size: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border-primary);
+
+  // Hide footer on mobile (bottom nav replaces it)
+  @media (max-width: 767px) {
+    display: none;
+  }
 
   p {
     margin: 0;
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+// Mobile Bottom Navigation
+// ─────────────────────────────────────────────────────────
+.igot-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-primary);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+
+  // Show only on mobile
+  @media (max-width: 767px) {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 56px;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 4px 0;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 10px;
+    transition: color 0.2s ease;
+
+    .material-icons {
+      font-size: 22px;
+      margin-bottom: 2px;
+    }
+
+    &:hover,
+    &.active {
+      color: var(--color-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: -2px;
+      border-radius: 4px;
+    }
+  }
+
+  &__label {
+    font-weight: 500;
+    line-height: 1;
   }
 }
