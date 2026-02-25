@@ -12,8 +12,10 @@
  */
 import { createApplication } from '@angular/platform-browser';
 import { createCustomElement } from '@angular/elements';
-import { provideZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection, importProvidersFrom } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideHttpClient } from '@angular/common/http';
+import { IgotLocalizationModule } from '@igot/localization';
 import { HomeFeatureComponent } from './home-feature.component';
 
 let initialized = false;
@@ -26,6 +28,8 @@ export async function bootstrap(): Promise<void> {
     providers: [
       provideZonelessChangeDetection(),
       provideAnimationsAsync(),
+      provideHttpClient(),
+      importProvidersFrom(IgotLocalizationModule),
     ],
   });
 

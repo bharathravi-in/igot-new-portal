@@ -31,6 +31,10 @@
     "@angular/elements": "^20.3.16",
     "@angular/platform-browser-dynamic": "^20.3.16",
     "@angular/router": "^20.3.16",
-    "typescript": "~5.8.0"
+    "typescript": "~5.8.0",
+    "webpack": "5.105.2"
+  },
+  "overrides": {
+    "webpack": "5.105.2"
   }
 }
